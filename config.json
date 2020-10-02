@@ -1,4 +1,6 @@
 { 
-    "token"  : "your bot key goes here",
-    "prefix" : "//"
+    "token"  : "",
+    "prefix" : "//",
+    "hushChannelId" : "",
+    "talkChannelId" : "" 
 }

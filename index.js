@@ -1,8 +1,6 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const { monitorEventLoopDelay } = require("perf_hooks");
-talkingChannel = ""
-suppressedChanel = ""
 
 /*
  DISCORD.JS VERSION 11 CODE
@@ -24,6 +22,21 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`Shutting you up`);
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
 });
 
 client.on("guildCreate", guild => {
@@ -58,11 +71,11 @@ client.on("message", async message => {
 
   // Let's go with a few common example commands! Feel free to delete or change those.  
   if (command === "stfu") {
-    client.channels.fetch(talkingChannel).then((response) => {
+    client.channels.fetch(config.talkChannelId).then((response) => {
       members = response.members
       for (member of members) {
         member = member[1]
-        client.channels.fetch(suppressedChanel).then((hush) => {
+        client.channels.fetch(config.hushChannelId).then((hush) => {
           member.edit({ channel: hush })
         })
       }
@@ -73,11 +86,11 @@ client.on("message", async message => {
   }
 
   if (command === "unstfu") {
-    client.channels.fetch(suppressedChanel).then((response) => {
+    client.channels.fetch(config.hushChannelId).then((response) => {
       members = response.members
       for (member of members) {
         member = member[1]
-        client.channels.fetch(talkingChannel).then((hush) => {
+        client.channels.fetch(config.talkChannelId).then((hush) => {
           member.edit({ channel: hush })
         })
       }
