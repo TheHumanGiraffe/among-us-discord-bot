@@ -1,5 +1,8 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
+const { monitorEventLoopDelay } = require("perf_hooks");
+talkingChannel = ""
+suppressedChanel = ""
 
 /*
  DISCORD.JS VERSION 11 CODE
@@ -55,27 +58,33 @@ client.on("message", async message => {
 
   // Let's go with a few common example commands! Feel free to delete or change those.  
   if (command === "stfu") {
-    roleId = "" // the role you want to mute's id goes here
-    channelId = "" // the channel you want them muted in's id goes here
-
-    role = await message.guild.roles.fetch(roleId)
-
-    channel = await message.guild.channels.resolve(channelId)
-      .updateOverwrite(role, {
-        SPEAK: false
-      })
+    client.channels.fetch(talkingChannel).then((response) => {
+      members = response.members
+      for (member of members) {
+        member = member[1]
+        client.channels.fetch(suppressedChanel).then((hush) => {
+          member.edit({ channel: hush })
+        })
+      }
+    })
+      .catch((err) => {
+        console.log(err)
+      });
   }
 
   if (command === "unstfu") {
-    roleId = "" // the role you want to mute's id goes here
-    channelId = "" // the chanel you want them muted in's id goes here
-
-    role = await message.guild.roles.fetch(roleId)
-
-    channel = await message.guild.channels.resolve(channelId)
-      .updateOverwrite(role, {
-        SPEAK: true
-      })
+    client.channels.fetch(suppressedChanel).then((response) => {
+      members = response.members
+      for (member of members) {
+        member = member[1]
+        client.channels.fetch(talkingChannel).then((hush) => {
+          member.edit({ channel: hush })
+        })
+      }
+    })
+      .catch((err) => {
+        console.log(err)
+      });
   }
 });
 
