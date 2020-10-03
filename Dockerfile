@@ -93,7 +93,7 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   # smoke test
   && yarn --version
 
-COPY index.js config.json go.sh /bot/
+COPY index.js go.sh /bot/
 
 RUN npm init -y
 # RUN npm install discord.js@11.6.3
