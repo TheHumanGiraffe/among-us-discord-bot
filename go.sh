@@ -1,2 +1,2 @@
 #!/bin/sh
-node /bot/index.js
+node /app/index.js
