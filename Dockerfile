@@ -11,4 +11,4 @@ COPY --from=build /app .
 # RUN npm install discord.js@latest
 
 # ENTRYPOINT ["sh"]
-ENTRYPOINT ["/bot/go.sh"]
+ENTRYPOINT ["/app/go.sh"]
