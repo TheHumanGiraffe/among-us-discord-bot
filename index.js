@@ -79,9 +79,7 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.  
   if (command === "stfu") {
     client.channels.fetch(config.talkChannelId).then((response) => {
-      members = response.members
-      for (member of members) {
-        member = member[1]
+      for (const [memberID, member] of response.members) {
         client.channels.fetch(config.hushChannelId).then((hush) => {
           member.edit({ channel: hush })
         })
@@ -94,9 +92,7 @@ client.on("message", async message => {
 
   if (command === "unstfu") {
     client.channels.fetch(config.hushChannelId).then((response) => {
-      members = response.members
-      for (member of members) {
-        member = member[1]
+      for (const [memberID, member] of response.members) {
         client.channels.fetch(config.talkChannelId).then((hush) => {
           member.edit({ channel: hush })
         })
